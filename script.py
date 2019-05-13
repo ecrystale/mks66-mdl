@@ -49,3 +49,47 @@ def run(filename):
     print symbols
     for command in commands:
         print command
+        
+        op = command['op']
+        args = command['args']
+        
+        if op=='push':
+            stack.append([x[:] for x in stack[-1]])
+            
+        if op=='pop':
+            stack.pop()
+            
+        if op=='move':
+            t=make_translate(float(args[0]),float(args[1]),float(args[2]))
+            matrix_mult(stack[-1],t)
+            stack[-1]=[x[:] for x in t]
+
+        if op=='rotate':
+            theta = float(args[1]) * (math.pi / 180)
+            if args[0] == 'x':
+                t = make_rotX(theta)
+            elif args[0] == 'y':
+                t = make_rotY(theta)
+            else:
+                t = make_rotZ(theta)
+            matrix_mult(stack[-1], t)
+            stack[-1] = [x[:] for x in t]
+
+        if op=='scale':
+            t=make_scale(float(args[0]),float(args[1]),float(args[2]))
+            matrix_mult(stack[-1],t)
+            stack[-1]=[x[:] for x in t]
+
+        if op=='box':
+        
+        if op=='sphere':
+            
+        if op=='torus':
+            
+        if op=='line':
+            
+        if op=='save':
+            save_extension(screen, args[0])
+
+        if op=='display':
+            display(screen)
