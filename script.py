@@ -81,13 +81,38 @@ def run(filename):
             stack[-1]=[x[:] for x in t]
 
         if op=='box':
-        
-        if op=='sphere':
+            add_box(coords2,
+                    float(args[0]), float(args[1]), float(args[2]),
+                    float(args[3]), float(args[4]), float(args[5]))
+            matrix_mult(stack[-1], coords2)
+            draw_polygons(coords2, screen, zbuffer, view, ambient, light, areflect, dreflect, sreflect)
+            coords2 = []
             
+        if op=='sphere':
+            add_sphere(coords2,
+                       float(args[0]), float(args[1]), float(args[2]),
+                       float(args[3]), step_3d)
+            matrix_mult(stack[-1], polygons)
+            draw_polygons(coords2, screen, zbuffer, view, ambient, light, areflect, dreflect, sreflect)
+            coords2 = []
+
+
         if op=='torus':
+            add_torus(coords2,
+                      float(args[0]), float(args[1]), float(args[2]),
+                      float(args[3]), float(args[4]), step_3d)
+            matrix_mult(stack[-1], polygons)
+            draw_polygons(coords2, screen, zbuffer, view, ambient, light, areflect, dreflect, sreflect)
+            coords2 = []
             
         if op=='line':
-            
+            add_edge( coords,
+                      float(args[0]), float(args[1]), float(args[2]),
+                      float(args[3]), float(args[4]), float(args[5]) )
+            matrix_mult(stack[-1], coords)
+            draw_lines(coords, screen, zbuffer, color)
+            coords = []
+
         if op=='save':
             save_extension(screen, args[0])
 
