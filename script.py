@@ -127,7 +127,7 @@ def run(filename):
             edges = []
 
         if op=='save':
-            save_extension(screen, args[0])
+            save_extension(screen, args[0] + ".png")
 
         if op=='display':
             display(screen)
